@@ -121,48 +121,97 @@
                     $("#passport_div").addClass("hidden");
                 }
             });
-
-            $("#registrationForm").submit(function(e) {
-                $(".error").html("");
-                var valid = true;
-
-                if (!$('#first_name').val()) {
-                    $("#first_name").next(".error").html("نام را پر کنید.");
-                    valid = false;
-                }
-                if (!$('#last_name').val()) {
-                    $("#last_name").next(".error").html("نام خانوادگی را پر کنید.");
-                    valid = false;
-                }
-                if (!$('#national_id').val()) {
-                    $("#national_id").next(".error").html("کد ملی را پر کنید.");
-                    valid = false;
-                }
-                if (!$('#birth_date').val()) {
-                    $("#birth_date").next(".error").html("تاریخ تولد را پر کنید.");
-                    valid = false;
-                }
-                if (!$('#phone_number').val() || $('#phone_number').val().length != 11) {
-                    $("#phone_number").next(".error").html("شماره همراه را به درستی پر کنید.");
-                    valid = false;
-                }
-                if (!$('#education_level').val()) {
-                    $("#education_level").next(".error").html("مقطع تحصیلی را انتخاب کنید.");
-                    valid = false;
-                }
-                if (!$('#university').val()) {
-                    $("#university").next(".error").html("دانشگاه پذیرفته شده را پر کنید.");
-                    valid = false;
-                }
-                if ($("input[name='citizenship']:checked").val() == "اتباع خارجی" && !$('#passport_number').val()) {
-                    $("#passport_number").next(".error").html("شماره پاسپورت را پر کنید.");
-                    valid = false;
-                }
-
-                if (!valid) {
-                    e.preventDefault();
-                }
-            });
         });
+
+
+            $(document).ready(function () {
+        $("#registrationForm").validate({
+            errorPlacement: function(error, element) {
+                error.appendTo(element.closest(".form-group").find(".error"));
+            },
+            rules: {
+                first_name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 35,
+                    pattern: /^[\u0600-\u06FF\s]+$/
+                },
+                last_name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 45,
+                    pattern: /^[\u0600-\u06FF\s]+$/
+                },
+                national_id: {
+                    required: true,
+                    exactlength: 10,
+                    digits: true
+                },
+                phone_number: {
+                    required: true,
+                    exactlength: 11,
+                    pattern: /^09\d{9}$/
+                },
+                birth_date: {
+                    required: true
+                },
+                education_level: {
+                    required: true
+                },
+                university: {
+                    required: true
+                },
+                citizenship: {
+                    required: true
+                },
+                passport_number: {
+                    required: {
+                        depends: function(element) {
+                            return $("input[name='citizenship']:checked").val() == 'اتباع خارجی';
+                        }
+                    }
+                }
+            },
+            messages: {
+                first_name: {
+                    required: "نام را وارد کنید.",
+                    minlength: "حداقل باید دو حرف باشد.",
+                    maxlength: "حداکثر مجاز 35 حرف است.",
+                    pattern: "لطفا نام خود را به فارسی وارد کنید."
+                },
+                last_name: {
+                    required: "نام خانوادگی را وارد کنید.",
+                    minlength: "حداقل باید دو حرف باشد.",
+                    maxlength: "حداکثر مجاز 45 حرف است.",
+                    pattern: "لطفا نام خانوادگی خود را به فارسی وارد کنید."
+                },
+                national_id: {
+                    required: "کد ملی را وارد کنید.",
+                    exactlength: "کد ملی باید 10 رقم باشد.",
+                    digits: "کد ملی باید عددی باشد."
+                },
+                phone_number: {
+                    required: "شماره همراه را وارد کنید.",
+                    exactlength: "شماره همراه باید 11 رقم باشد.",
+                    pattern: "فرمت شماره همراه صحیح نیست."
+                },
+                birth_date: {
+                    required: "تاریخ تولد را وارد کنید."
+                },
+                education_level: {
+                    required: "مقطع تحصیلی را انتخاب کنید."
+                },
+                university: {
+                    required: "دانشگاه پذیرفته شده را وارد کنید."
+                },
+                citizenship: {
+                    required: "تابعیت را انتخاب کنید."
+                },
+                passport_number: {
+                    required: "شماره پاسپورت را وارد کنید."
+                }
+            }
+        });
+    });
     </script>
 </body>
