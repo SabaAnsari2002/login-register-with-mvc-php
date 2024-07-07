@@ -9,6 +9,21 @@
 <body>
     <div class="container mt-5">
         <h2>Choose Insert Method</h2>
+
+        <!-- Display success message -->
+        <?php if ($this->session->flashdata('success')): ?>
+            <div class="alert alert-success">
+                <?= $this->session->flashdata('success') ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- Display error message -->
+        <?php if ($this->session->flashdata('error')): ?>
+            <div class="alert alert-danger">
+                <?= $this->session->flashdata('error') ?>
+            </div>
+        <?php endif; ?>
+
         <form method="post" action="<?= base_url('index.php/insertmethod/submit_method') ?>">
             <div class="row">
                 <div class="col-md-6">
