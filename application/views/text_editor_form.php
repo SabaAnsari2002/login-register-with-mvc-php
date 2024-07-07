@@ -15,8 +15,12 @@
                 <input type="text" class="form-control" id="national_code" name="national_code" required>
             </div>
             <div class="form-group">
-                <label for="message">Message:</label>
-                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

@@ -8,14 +8,12 @@ class Message_model extends CI_Model {
         $this->load->database();
     }
 
-    // Insert a single message
     public function insert_message($data) {
         $this->db->insert('messages', $data);
     }
 
-    // Insert bulk messages
     public function insert_bulk_messages($data) {
-        $this->db->insert_batch('bulk_messages', $data);
+        $this->db->insert_batch('messages', $data);
     }
 }
 ?>
