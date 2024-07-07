@@ -51,6 +51,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 //$route['default_controller'] = 'Controller';
-$route['default_controller'] = 'ControllerForm';
+//$route['default_controller'] = 'ControllerForm';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['default_controller'] = 'dashboard';
+
+
+$route['insertmethod'] = 'insertmethod';
+$route['insertmethod/submit_method'] = 'insertmethod/submit_method';
+
+$route['dashboard'] = 'dashboard';
+$route['dashboard/text_editor_form'] = 'dashboard/text_editor_form';
+$route['dashboard/text_file_form'] = 'dashboard/text_file_form';
+$route['dashboard/submit_message'] = 'dashboard/submit_message';
+$route['dashboard/upload_file'] = 'dashboard/upload_file';

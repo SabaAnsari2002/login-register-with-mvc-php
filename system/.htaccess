@@ -1,6 +1,28 @@
-<IfModule authz_core_module>
-	Require all denied
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /sazman1/
+
+    # Redirect Trailing Slashes...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+
+    # Restrict access to sensitive files...
+    <FilesMatch "\.(htaccess|htpasswd|ini|phar|sh|log|json|config|bak|swp|dist)$">
+        Require all denied
+    </FilesMatch>
 </IfModule>
-<IfModule !authz_core_module>
-	Deny from all
+
+<IfModule mod_authz_core.c>
+    Require all granted
+</IfModule>
+
+<IfModule !mod_authz_core.c>
+    Order Allow,Deny
+    Allow from all
 </IfModule>
